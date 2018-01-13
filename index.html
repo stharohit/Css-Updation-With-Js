@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Css with JS</title>
+  </head>
+  <style>
+    body{
+      background: #193549;
+    }
+    h1{
+      color: #f7f7f7;
+      text-align: center;
+    }
+    label{
+      font-size: 30px;
+      color: white;
+    }
+    :root{
+      --base: #ffc600;
+      --spacing: 20px;
+      --blur: 10px;
+    }
+    .updateColor{
+      color: var(--base);
+    }
+    img{
+      padding: var(--spacing);
+      background: var(--base);
+      filter: blur(var(--blur));
+    }
+
+  </style>
+  <body>
+    <h1>Update Css Variable With <span class="updateColor">JS</span></h1>
+
+    <div class="control">
+      <label for="spacing">Spacing:</label>
+      <input type="range" name="spacing" min="10" max="100" value="10" data-sizing="px">
+
+      <label for="blur">Blur:</label>
+      <input type="range" name="blur" min="0" max="25" value="10" data-sizing="px">
+
+      <label for="basecolor">Base Color:</label>
+      <input type="color" name="base" value="#f0f0f0">
+    </div>
+    <br>
+    <img src="https://www.w3schools.com/howto/img_paris.jpg" alt="not working on your browser" width="800px" height="500px">
+
+    <script>
+      var input = document.querySelectorAll('.control input');
+
+      function handleUpdate() {
+        const suffix = this.dataset.sizing || '';
+        document.documentElement.style.setProperty(`--${this.name}`,this.value + suffix);
+      }
+
+      input.forEach(input => input.addEventListener("input",handleUpdate));
+    </script>
+  </body>
+</html>
